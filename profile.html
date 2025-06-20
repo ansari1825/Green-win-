@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile - WIN 777</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #e0f8e0, #ccf0ff);
+      color: #004d40;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      color: blue;
+      margin-bottom: 20px;
+    }
+    .profile-box {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .value {
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .gift-box {
+      margin-top: 20px;
+    }
+    .gift-box input {
+      width: 70%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+    .gift-box button {
+      padding: 8px 12px;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+    .history-box {
+      margin-top: 30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #e0f0ff;
+    }
+    .logout-btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 30px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>WIN 777 - Profile</header>
+
+  <div class="profile-box">
+    <div class="label">Unique Name:</div>
+    <div class="value" id="username">Player20240123</div>
+
+    <div class="label">User ID:</div>
+    <div class="value" id="userId">#<span id="uid"></span></div>
+
+    <div class="gift-box">
+      <input type="text" id="giftCode" placeholder="Enter Gift Code" />
+      <button onclick="claimReward()">Claim Reward</button>
+    </div>
+  </div>
+
+  <div class="history-box">
+    <h3>Betting History (Last 5)</h3>
+    <table id="betHistory">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Value</th>
+          <th>Amount</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Filled dynamically -->
+      </tbody>
+    </table>
+  </div>
+
+  <button class="logout-btn" onclick="logout()">Logout</button>
+
+  <script>
+    // Generate random 5-digit UID
+    document.getElementById("uid").innerText = Math.floor(10000 + Math.random() * 90000);
+
+    // Dummy betting data
+    const betData = [
+      { type: 'Number', value: '9', amount: 100, result: 'Win' },
+      { type: 'Color', value: 'Red', amount: 50, result: 'Lose' },
+      { type: 'Size', value: 'Small', amount: 75, result: 'Win' },
+      { type: 'Color', value: 'Green', amount: 100, result: 'Lose' },
+      { type: 'Number', value: '3', amount: 150, result: 'Win' },
+    ];
+
+    function loadBetHistory() {
+      const tbody = document.getElementById("betHistory").querySelector("tbody");
+      tbody.innerHTML = "";
+      betData.forEach(bet => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${bet.type}</td>
+          <td>${bet.value}</td>
+          <td>₹${bet.amount}</td>
+          <td>${bet.result}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function claimReward() {
+      const code = document.getElementById("giftCode").value.trim();
+      if (code === "") return alert("Please enter a gift code.");
+      // Dummy validation
+      if (code.toLowerCase() === "win100") {
+        alert("✅ Code valid! ₹100 added to wallet.");
+      } else {
+        alert("❌ Invalid gift code.");
+      }
+    }
+
+    function logout() {
+      location.href = "index.html";
+    }
+
+    window.onload = loadBetHistory;
+  </script>
+
+</body>
+</html>

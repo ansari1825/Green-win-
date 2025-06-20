@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deposit - WIN 777</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #e6f9e6, #ccf0ff);
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: blue;
+    }
+    h2 {
+      color: green;
+      margin-bottom: 20px;
+    }
+    select, input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 1em;
+      border-radius: 8px;
+    }
+    #qrContainer {
+      margin: 20px 0;
+    }
+    .upi-note {
+      font-size: 0.9em;
+      color: #444;
+    }
+    .upload-section {
+      margin-top: 20px;
+    }
+    input[type="file"] {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>WIN 777</h1>
+  <h2>Deposit</h2>
+
+  <label for="amountSelect">Select Amount:</label><br/>
+  <select id="amountSelect">
+    <option value="100">₹100</option>
+    <option value="200">₹200</option>
+    <option value="300">₹300</option>
+    <option value="500">₹500</option>
+    <option value="1000">₹1000</option>
+    <option value="1500">₹1500</option>
+    <option value="2000">₹2000</option>
+  </select><br/>
+
+  <button onclick="generateQR()">Generate QR</button>
+
+  <div id="qrContainer"></div>
+  <div class="upi-note">Scan & Pay to UPI: <b>8623814453@ibl</b></div>
+
+  <div class="upload-section">
+    <h3>Upload Payment Screenshot</h3>
+    <input type="file" id="screenshot" accept="image/*"><br/>
+
+    <h3>Enter UTR/Transaction ID</h3>
+    <input type="text" id="utr" placeholder="Enter UTR / Transaction ID" style="width: 80%;"><br/>
+
+    <button onclick="submitDeposit()">Submit for Verification</button>
+  </div>
+
+  <script>
+    const upiID = "8623814453@ibl";
+
+    function generateQR() {
+      const amount = document.getElementById("amountSelect").value;
+      const qrText = `upi://pay?pa=${upiID}&pn=WIN777&am=${amount}&cu=INR`;
+      const qrContainer = document.getElementById("qrContainer");
+      qrContainer.innerHTML = "";
+      QRCode.toCanvas(qrText, { width: 200 }, function (err, canvas) {
+        if (err) console.error(err);
+        qrContainer.appendChild(canvas);
+      });
+    }
+
+    function submitDeposit() {
+      const amount = document.getElementById("amountSelect").value;
+      const utr = document.getElementById("utr").value.trim();
+      const fileInput = document.getElementById("screenshot");
+      const file = fileInput.files[0];
+
+      if (!utr || !file) {
+        alert("Please upload a screenshot and enter UTR number.");
+        return;
+      }
+
+      // Simulated submit — replace with real backend call
+      alert("Submitted for verification. Admin will review your transaction.");
+
+      // TODO: Upload to backend via fetch()/formData etc.
+    }
+  </script>
+
+</body>
+</html>

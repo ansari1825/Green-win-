@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wallet - WIN 777</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #e0ffe0, #d0f0ff);
+      color: #003d33;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      color: #0077cc;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #009933;
+    }
+
+    .wallet-box {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .balance {
+      font-size: 1.5em;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: space-around;
+      margin: 15px 0;
+    }
+
+    .btn-row button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .deposit-btn {
+      background-color: #00c853;
+    }
+
+    .withdraw-btn {
+      background-color: #d50000;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #e0f7fa;
+    }
+
+    .section-title {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #004d40;
+      border-left: 5px solid #00c853;
+      padding-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>WIN 777</header>
+  <h2>WALLET</h2>
+
+  <div class="wallet-box">
+    <div class="balance">Available Balance: ₹<span id="balance">43</span></div>
+    <div class="wallet-section">
+  <style>
+  
+
+  .deposit {
+    background-color: #2e7d32;
+    color: white;
+  }
+
+  .deposit:hover {
+    background-color: #1b5e20;
+  }
+
+  .withdraw {
+    background-color: #c62828;
+    color: white;
+  }
+
+  .withdraw:hover {
+    background-color: #8e0000;
+  }
+</style>
+
+<div class="wallet-section">
+  <button class="deposit" onclick="location.href='deposit.html'">Deposit</button>
+  <button class="withdraw" onclick="location.href='withdraw.html'">Withdraw</button>
+</div>
+
+  
+
+  <div class="wallet-box">
+    <div class="section-title">Deposit History</div>
+    <table id="depositTable">
+      <thead>
+        <tr><th>Time</th><th>Amount</th></tr>
+      </thead>
+      <tbody>
+        <!-- Deposit records go here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wallet-box">
+    <div class="section-title">Withdraw History</div>
+    <table id="withdrawTable">
+      <thead>
+        <tr><th>Time</th><th>Amount</th></tr>
+      </thead>
+      <tbody>
+        <!-- Withdraw records go here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let balance = 1000;
+    const balanceEl = document.getElementById('balance');
+    const depositTable = document.getElementById('depositTable').querySelector('tbody');
+    const withdrawTable = document.getElementById('withdrawTable').querySelector('tbody');
+
+    function updateBalanceDisplay() {
+      balanceEl.textContent = balance;
+    }
+
+    function getTime() {
+      return new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+    }
+
+    function deposit() {
+      const amount = 500;
+      balance += amount;
+      updateBalanceDisplay();
+      const row = `<tr><td>${getTime()}</td><td>₹${amount}</td></tr>`;
+      depositTable.innerHTML = row + depositTable.innerHTML;
+    }
+
+    function withdraw() {
+      const amount = 500;
+      if (balance >= amount) {
+        balance -= amount;
+        updateBalanceDisplay();
+        const row = `<tr><td>${getTime()}</td><td>₹${amount}</td></tr>`;
+        withdrawTable.innerHTML = row + withdrawTable.innerHTML;
+      } else {
+        alert("Insufficient Balance");
+      }
+    }
+  </script> 
+
+
+</body>
+</html>

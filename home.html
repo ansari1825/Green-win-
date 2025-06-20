@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GREEN WIN - Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #d0f0e0, #b0dfff);
+      color: #004d40;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background: #00bfa5;
+      color: white;
+      text-align: center;
+      padding: 1.2em 0;
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    .main-buttons {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .btn {
+      width: 70%;
+      padding: 15px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-wingo { background: #00c853; color: white; }
+    .btn-gold { background: #ffd700; color: #333; }
+    .btn-diamond { background: #00b0ff; color: white; }
+
+    footer {
+      display: flex;
+      justify-content: space-around;
+      background: #004d40;
+      padding: 10px 0;
+    }
+
+    .footer-btn {
+      color: white;
+      font-size: 1em;
+      text-align: center;
+      flex: 1;
+    }
+
+    .footer-btn:hover {
+      color: #80d8ff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    GREEN WIN
+  </header>
+
+  <div class="main-buttons">
+    
+    <div onclick="location.href='wingo60.html'" style="cursor:pointer; background:#00cc66; padding:15px; color:white; font-weight:bold; text-align:center; border-radius:8px;">
+  Wingo 1 Minute
+</div>
+
+
+    <button class="btn btn-gold">Gold</button>
+    <button class="btn btn-diamond">Diamond</button>
+  </div>
+
+  <style>
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to right, #e0ffe0, #ccf0ff);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .bottom-nav button {
+    flex: 1;
+    background: none;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    color: #00695c;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .bottom-nav button:hover {
+    color: #004d40;
+  }
+</style>
+
+<div class="bottom-nav">
+  <button onclick="location.href='home.html'">Home</button>
+  <button onclick="location.href='wallet.html'">Wallet</button>
+  <button onclick="location.href='profile.html'">Profile</button>
+</div>
+
+</body>
+</html>

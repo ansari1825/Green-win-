@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GREEN WIN</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #00cc66, #8a2be2, #ff0033);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #00cc66;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #00994d;
+    }
+
+    .switch {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .error {
+      color: yellow;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>GREEN WIN</h1>
+
+  <div class="container" id="registerForm">
+    <h2>Register</h2>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="text" id="regNumber">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="regPassword">
+    </div>
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" id="regConfirmPassword">
+    </div>
+    <button onclick="register()">Register</button>
+    <div class="error" id="registerError"></div>
+    <div class="switch">
+      Already have an account? <a href="#" onclick="showLogin()">Login</a>
+    </div>
+  </div>
+
+  <div class="container" id="loginForm" style="display: none;">
+    <h2>Login</h2>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="text" id="loginNumber">
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword">
+    </div>
+    <button onclick="login()">Login</button>
+    <div class="error" id="loginError"></div>
+    <div class="switch">
+      Don't have an account? <a href="#" onclick="showRegister()">Register</a>
+    </div>
+  </div>
+
+  <script>
+    let users = {};
+
+    function showLogin() {
+      document.getElementById("registerForm").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
+      clearErrors();
+    }
+
+    function showRegister() {
+      document.getElementById("registerForm").style.display = "block";
+      document.getElementById("loginForm").style.display = "none";
+      clearErrors();
+    }
+
+    function clearErrors() {
+      document.getElementById("registerError").textContent = "";
+      document.getElementById("loginError").textContent = "";
+    }
+
+    function register() {
+      const number = document.getElementById("regNumber").value.trim();
+      const pass = document.getElementById("regPassword").value;
+      const confirmPass = document.getElementById("regConfirmPassword").value;
+
+      if (users[number]) {
+        document.getElementById("registerError").textContent = "This number is already registered.";
+        return;
+      }
+
+      if (pass !== confirmPass) {
+        document.getElementById("registerError").textContent = "Passwords do not match.";
+        return;
+      }
+
+      users[number] = pass;
+      alert("Registration successful! Please login.");
+      showLogin();
+    }
+
+    function login() {
+      const number = document.getElementById("loginNumber").value.trim();
+      const pass = document.getElementById("loginPassword").value;
+
+      if (!users[number]) {
+        document.getElementById("loginError").textContent = "Number not registered. Please register first.";
+        return;
+      }
+
+      if (users[number] !== pass) {
+        document.getElementById("loginError").textContent = "Incorrect password. Please enter the correct password.";
+        return;
+      }
+
+      alert("Login successful!");
+      window.location.href = "home.html"; // or any next page
+    }
+  </script>
+
+</body>
+</html>

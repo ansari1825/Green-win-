@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wingo 1 Minute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #e0f8e0, #ccf0ff);
+      color: #004d40;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+    header {
+      color: blue;
+      font-size: 2em;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .wallet-section {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .wallet-section button {
+      padding: 10px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+      border: none;
+    }
+    .deposit { background-color: green; }
+    .withdraw { background-color: red; }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .bet-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    .bet-button {
+      padding: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+    }
+    .green { background-color: green; }
+    .red { background-color: red; }
+    .violet { background-color: purple; }
+    .blue { background-color: blue; }
+    .yellow { background-color: gold; color: black; }
+    .dual-red-violet {
+      background: linear-gradient(to right, red 50%, purple 50%);
+    }
+    .dual-green-violet {
+      background: linear-gradient(to right, green 50%, purple 50%);
+    }
+    input {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      font-size: 1em;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    .win { background-color: #c8e6c9; }
+    .loss { background-color: #ffcdd2; }
+  </style>
+</head>
+<body>
+  <header>Wingo 1 Minute</header>
+
+  <div class="wallet-section">
+    <div>Wallet: ₹<span id="wallet">43</span></div>
+    <style>
+  .wallet-section {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+    padding: 15px;
+    background: linear-gradient(to right, #e0ffe0, #fce4ec);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .wallet-section button {
+    padding: 12px 24px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+  }
+
+  .deposit {
+    background-color: #2e7d32;
+    color: white;
+  }
+
+  .deposit:hover {
+    background-color: #1b5e20;
+  }
+
+  .withdraw {
+    background-color: #c62828;
+    color: white;
+  }
+
+  .withdraw:hover {
+    background-color: #8e0000;
+  }
+</style>
+
+<div class="wallet-section">
+  <button class="deposit" onclick="location.href='deposit.html'">Deposit</button>
+  <button class="withdraw" onclick="location.href='withdraw.html'">Withdraw</button>
+</div>
+
+  </div>
+
+  <div class="info-row">
+    <div>Period: <span id="period"></span></div>
+    <div>Timer: <span id="timer"></span>s</div>
+  </div>
+
+  <div class="bet-grid">
+    <button class="bet-button dual-red-violet" onclick="placeBet('number', 0)">0</button>
+    <button class="bet-button green" onclick="placeBet('number', 1)">1</button>
+    <button class="bet-button red" onclick="placeBet('number', 2)">2</button>
+    <button class="bet-button green" onclick="placeBet('number', 3)">3</button>
+    <button class="bet-button red" onclick="placeBet('number', 4)">4</button>
+    <button class="bet-button dual-green-violet" onclick="placeBet('number', 5)">5</button>
+    <button class="bet-button red" onclick="placeBet('number', 6)">6</button>
+    <button class="bet-button green" onclick="placeBet('number', 7)">7</button>
+    <button class="bet-button red" onclick="placeBet('number', 8)">8</button>
+    <button class="bet-button green" onclick="placeBet('number', 9)">9</button>
+    <button class="bet-button green" onclick="placeBet('color', 'Green')">Green</button>
+    <button class="bet-button red" onclick="placeBet('color', 'Red')">Red</button>
+    <button class="bet-button violet" onclick="placeBet('color', 'Violet')">Violet</button>
+    <button class="bet-button blue" onclick="placeBet('size', 'Small')">Small</button>
+    <button class="bet-button yellow" onclick="placeBet('size', 'Big')">Big</button>
+  </div>
+
+  <input type="number" id="betAmount" placeholder="Enter bet amount" />
+
+  <h3>Game History</h3>
+  <table id="gameHistory">
+    <thead><tr><th>Period</th><th>Number</th><th>Size</th><th>Color</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <h3>Your Bets</h3>
+  <table id="bettingHistory">
+    <thead><tr><th>Type</th><th>Value</th><th>Amount</th><th>Result</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    let wallet = 1000;
+    let bets = [];
+    let gameHistory = [];
+
+    function updateWallet() {
+      document.getElementById('wallet').textContent = wallet;
+    }
+
+    function getPeriod() {
+      const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+      const pad = n => n.toString().padStart(2, '0');
+      return now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + pad(now.getHours()) + pad(now.getMinutes());
+    }
+
+    function getRemainingSeconds() {
+      const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+      return 60 - now.getSeconds();
+    }
+
+    function getResultFromPeriod(period) {
+      const hash = Array.from(period).reduce((acc, char) => acc + char.charCodeAt(0), 0);
+      return hash % 10;
+    }
+
+    function getColor(num) {
+      if (num === 0) return "Red/Violet";
+      if ([1, 3, 7, 9].includes(num)) return "Green";
+      if ([2, 4, 6, 8].includes(num)) return "Red";
+      if (num === 5) return "Green/Violet";
+    }
+
+    function getSize(num) {
+      return num >= 5 ? "Big" : "Small";
+    }
+
+    function placeBet(type, value) {
+      const amount = parseInt(document.getElementById('betAmount').value);
+      if (!amount || amount <= 0 || wallet < amount) return alert("Invalid amount or balance");
+      wallet -= amount;
+      updateWallet();
+      bets.push({ type, value, amount, result: null, period: getPeriod() });
+      updateBettingHistory();
+    }
+
+    function updateBettingHistory() {
+      const tbody = document.querySelector('#bettingHistory tbody');
+      tbody.innerHTML = '';
+      bets.forEach(b => {
+        const tr = document.createElement('tr');
+        tr.className = b.result === 'Win' ? 'win' : b.result === 'Lose' ? 'loss' : '';
+        tr.innerHTML = `<td>${b.type}</td><td>${b.value}</td><td>₹${b.amount}</td><td>${b.result || 'Pending'}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateGameHistory() {
+      const tbody = document.querySelector('#gameHistory tbody');
+      tbody.innerHTML = '';
+      gameHistory.slice(0, 10).forEach(r => {
+        tbody.innerHTML += `<tr><td>${r.period}</td><td>${r.number}</td><td>${r.size}</td><td>${r.color}</td></tr>`;
+      });
+    }
+
+    function resolveBets(currentPeriod) {
+      const number = getResultFromPeriod(currentPeriod);
+      const size = getSize(number);
+      const color = getColor(number);
+      gameHistory.unshift({ period: currentPeriod, number, size, color });
+      bets = bets.map(b => {
+        let win = false;
+        if (b.type === 'number') win = parseInt(b.value) === number;
+        if (b.type === 'size') win = b.value === size;
+        if (b.type === 'color') win = color.includes(b.value);
+        if (win) wallet += b.amount * 2;
+        return { ...b, result: win ? 'Win' : 'Lose' };
+      });
+      updateWallet();
+      updateBettingHistory();
+      updateGameHistory();
+      bets = [];
+    }
+
+    function startClock() {
+      setInterval(() => {
+        const period = getPeriod();
+        const seconds = getRemainingSeconds();
+        document.getElementById('timer').textContent = seconds;
+        document.getElementById('period').textContent = period;
+        if (seconds === 59) resolveBets(period);
+      }, 1000);
+    }
+
+    updateWallet();
+    startClock();
+  </script>
+</body>
+</html>
